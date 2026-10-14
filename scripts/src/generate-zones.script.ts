@@ -44,7 +44,7 @@ optionalArgs
       process.exit(1);
     }
 
-    params[param] = Array.isArray(params[param])
+    (params as any)[param] = Array.isArray((params as any)[param])
       ? value.split(',').map(Number)
       : Number(value);
   });
