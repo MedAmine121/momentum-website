@@ -25,7 +25,7 @@ const opts: Sentry.NodeOptions = {
   dsn,
   environment: process.env['SENTRY_ENV'],
   tracesSampleRate: sampleRate,
-  profilesSampleRate: sampleRate,
+  profileSessionSampleRate: sampleRate,
   debug: false,
   normalizeDepth: 10,
   integrations,

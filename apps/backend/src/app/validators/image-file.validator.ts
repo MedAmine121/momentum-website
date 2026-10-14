@@ -1,5 +1,5 @@
 import { FileValidator } from '@nestjs/common';
-import sharp from 'sharp';
+import sharp, { Metadata, FormatEnum } from 'sharp';
 import * as Multer from '@nest-lab/fastify-multer';
 import { IFile } from '@nestjs/common/pipes/file/interfaces';
 import { ImageType } from '@momentum/constants';
@@ -39,7 +39,7 @@ export class ImageFileValidator extends FileValidator<
       }
     }
 
-    let metadata: sharp.Metadata;
+    let metadata: Metadata;
     try {
       // This does the brunt of the validation - sharp will autodetect image
       // formats, and throw if it can't parse it at all
@@ -82,11 +82,11 @@ export class ImageFileValidator extends FileValidator<
 
   private static compareImageType(
     imageType: ImageType,
-    sharpType: keyof sharp.FormatEnum
+    sharpType: keyof FormatEnum
   ): boolean {
     switch (imageType) {
       case ImageType.JPG:
-        return ['jpeg', 'jpg'].includes(sharpType);
+        return sharpType === 'jpeg';
       case ImageType.PNG:
         return sharpType === 'png';
     }

@@ -56,7 +56,7 @@ import {
   parallel
 } from '@momentum/util-fn';
 import { File } from '@nest-lab/fastify-multer';
-import { vdf } from 'fast-vdf';
+import * as vdf from 'fast-vdf';
 import Zip from 'adm-zip';
 import { ConfigService } from '@nestjs/config';
 import { Merge, MergeExclusive } from 'type-fest';
