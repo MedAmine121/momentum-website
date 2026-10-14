@@ -12,7 +12,8 @@ export default [
         'error',
         {
           type: ['element', 'attribute'],
-          prefix: ['m']
+          prefix: ['m'],
+          style: 'camelCase'
         }
       ],
       '@angular-eslint/component-selector': [

@@ -1,7 +1,7 @@
 <p class="card-title text-5xl sm:text-8xl">Map Submission</p>
 
 @if (isMapperOrPorter || !hasMapInSubmission || true) {
-  <m-alert class="alert--fancy my-8 bg-blue-700 bg-opacity-20">
+  <m-alert class="alert--fancy bg-blue-700 my-8 bg-opacity-20">
     <p class="max-w-[70rem] pr-6">
       If this is your first time submitting a map, please check our
       <a href="https://docs.momentum-mod.org/guide/map_submission/map_submission/">docs page</a>, plus you can hover over
@@ -10,26 +10,26 @@
       <a href="https://discord.gg/momentummod">Discord</a>!
     </p>
   </m-alert>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" preventEnterSubmit>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" mPreventEnterSubmit>
     <div class="mt-4 flex flex-col">
       <!--  Evil fake fieldset using negative margins. Backdrop-filter extends
             to the header section of a real fieldset, looks like shite    -->
       <div class="z-10 -mb-12 ml-4 mt-4 flex items-center gap-4">
-        <div class="stack rounded border border-white border-opacity-20 bg-gray-800 bg-opacity-25 p-2 shadow backdrop-blur">
+        <div class="stack bg-gray-800 rounded border border-white border-opacity-20 bg-opacity-25 p-2 shadow backdrop-blur">
           <m-icon
-            class="scale-0 text-3xl text-green-500 transition-transform"
+            class="text-green-500 scale-0 text-3xl transition-transform"
             [icon]="'check-outline'"
             [ngClass]="{ 'scale-100': FormUtils.groupIsComplete(files) }"
             mTooltip="Section is complete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-red-500 transition-transform"
+            class="text-red-500 scale-0 text-3xl transition-transform"
             [icon]="'alert-outline'"
             [ngClass]="{ 'scale-100': FormUtils.groupIsActuallyInvalid(files) }"
             mTooltip="Section contains invalid items!"
           ></m-icon>
           <m-icon
-            class="scale-0 text-3xl text-blue-400 transition-transform"
+            class="text-blue-400 scale-0 text-3xl transition-transform"
             [icon]="'pencil-outline'"
             [ngClass]="{ 'scale-100': FormUtils.groupIsIncomplete(files) }"
             mTooltip="Section is incomplete!"
@@ -49,29 +49,29 @@
           </p>
           <div>
             @if (bsp.errors?.['required'] && bsp.dirty) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>A BSP file is required.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>A BSP file is required.</p>
             }
             @if (bsp.errors?.['fileName']) {
-              <p class="mb-1 text-right text-lg text-red-400">
+              <p class="text-red-400 mb-1 text-right text-lg">
                 <b>Error: </b>File name must be alphanumeric + hyphens + underscores, and end in <b>.bsp</b>.
               </p>
             }
             @if (bsp.errors?.['fileMaxSize']) {
-              <p class="mb-1 text-right text-lg text-red-400">
+              <p class="text-red-400 mb-1 text-right text-lg">
                 <b>Error: </b>Maximum allowed file size is {{ MAX_BSP_SIZE / (1024 * 1024) }} MB.
               </p>
             }
             @if (bsp.errors?.['bspFileNotCompressed']) {
-              <p class="mb-1 text-right text-lg text-red-400">
+              <p class="text-red-400 mb-1 text-right text-lg">
                 <b>Error: </b>BSP file is not compressed.
                 <a href="https://docs.momentum-mod.org/guide/map_submission/map_porting/#step-4-compress-the-map">Docs</a>
               </p>
             }
             @if (bsp.errors?.['bspFileReadError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>Could not parse file, are you sure it's a valid BSP?</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>Could not parse file, are you sure it's a valid BSP?</p>
             }
             @if (bsp.errors?.['fileReadError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>Could not read file.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>Could not read file.</p>
             }
           </div>
           <m-file-upload [formControl]="bsp" typeName="BSP" acceptExtensions=".bsp" icon="land-plots" />
@@ -84,16 +84,16 @@
           <p class="mb-6 mt-3 block w-auto flex-grow text-balance px-3 text-center text-sm">The zones for your map</p>
           <div>
             @if (zon.errors?.['required'] && zon.dirty) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>A zone file is required.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>A zone file is required.</p>
             }
             @if (zon.errors?.['zoneFileValidationError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b> {{ zon.errors?.['zoneFileValidationError'][0].message }}.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b> {{ zon.errors?.['zoneFileValidationError'][0].message }}.</p>
             }
             @if (zon.errors?.['zonFileNotJsonError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>Could not parse file, it's not valid JSON!</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>Could not parse file, it's not valid JSON!</p>
             }
             @if (zon.errors?.['fileReadError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>Could not read file.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>Could not read file.</p>
             }
           </div>
           <m-file-upload [formControl]="zon" typeName=".json" icon="vector-polygon" acceptExtensions=".json" />
@@ -105,18 +105,18 @@
           </p>
           <div>
             @if (vmfs.errors?.['fileExtension']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>File extension must end in <b>.vmf</b>.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>File extension must end in <b>.vmf</b>.</p>
             }
             @if (vmfs.errors?.['fileMaxSize']) {
-              <p class="mb-1 text-right text-lg text-red-400">
+              <p class="text-red-400 mb-1 text-right text-lg">
                 <b>Error: </b>Maximum allowed file size is {{ MAX_VMF_SIZE / (1024 * 1024) }} MB.
               </p>
             }
             @if (vmfs.errors?.['vdfFileValidationError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>Could not parse file, it's not a valid VDF/KeyValues file!</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>Could not parse file, it's not a valid VDF/KeyValues file!</p>
             }
             @if (vmfs.errors?.['fileReadError']) {
-              <p class="mb-1 text-right text-lg text-red-400"><b>Error: </b>Could not read file.</p>
+              <p class="text-red-400 mb-1 text-right text-lg"><b>Error: </b>Could not read file.</p>
             }
           </div>
           <m-multi-file-upload [formControl]="vmfs" typeName="VMF" acceptExtensions=".vmf" icon="hammer" [max]="20" />
@@ -127,21 +127,21 @@
     <div class="flex flex-col">
       <div class="z-50 -mb-12 ml-4 mt-12 flex items-center gap-4">
         <!--        TODO: VALIDATION NOT RIGHT D:<-->
-        <div class="stack rounded border border-white border-opacity-20 bg-gray-800 bg-opacity-25 p-2 shadow backdrop-blur">
+        <div class="stack bg-gray-800 rounded border border-white border-opacity-20 bg-opacity-25 p-2 shadow backdrop-blur">
           <m-icon
-            class="scale-0 text-3xl text-green-500 transition-transform"
+            class="text-green-500 scale-0 text-3xl transition-transform"
             [icon]="'check-outline'"
             [ngClass]="{ 'scale-100': FormUtils.groupIsComplete(details) }"
             mTooltip="Section is complete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-red-500 transition-transform"
+            class="text-red-500 scale-0 text-3xl transition-transform"
             [icon]="'alert-outline'"
             [ngClass]="{ 'scale-100': FormUtils.groupIsActuallyInvalid(details) }"
             mTooltip="Section contains invalid items!"
           />
           <m-icon
-            class="scale-0 text-3xl text-blue-400 transition-transform"
+            class="text-blue-400 scale-0 text-3xl transition-transform"
             [icon]="'pencil-outline'"
             [ngClass]="{ 'scale-100': FormUtils.groupIsIncomplete(details) }"
             mTooltip="Section is incomplete!"
@@ -156,21 +156,21 @@
 
     <div class="flex flex-col">
       <div class="z-10 -mb-12 ml-4 mt-12 flex items-center gap-4">
-        <div class="stack rounded border border-white border-opacity-20 bg-gray-800 bg-opacity-25 p-2 shadow backdrop-blur">
+        <div class="stack bg-gray-800 rounded border border-white border-opacity-20 bg-opacity-25 p-2 shadow backdrop-blur">
           <m-icon
-            class="scale-0 text-3xl text-green-500 transition-transform"
+            class="text-green-500 scale-0 text-3xl transition-transform"
             [icon]="'check-outline'"
             [ngClass]="{ 'scale-100': images.valid && images.dirty }"
             mTooltip="Section is complete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-red-500 transition-transform"
+            class="text-red-500 scale-0 text-3xl transition-transform"
             [icon]="'alert-outline'"
             [ngClass]="{ 'scale-100': images.invalid && images.dirty }"
             mTooltip="Section contains invalid items!"
           />
           <m-icon
-            class="scale-0 text-3xl text-blue-400 transition-transform"
+            class="text-blue-400 scale-0 text-3xl transition-transform"
             [icon]="'pencil-outline'"
             [ngClass]="{ 'scale-100': images.pristine }"
             mTooltip="Section is incomplete!"
@@ -191,26 +191,26 @@
         <m-map-image-selection [formControlPassthrough]="images" icon="image-multiple-outline" [previewFullscreenBackground]="true" />
         <div>
           @if (images.errors?.['required'] && images.dirty) {
-            <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>Must include at least a thumbnail image.</p>
+            <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>Must include at least a thumbnail image.</p>
           }
           @if (images.errors?.['fileExtension']) {
-            <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>All images must be PNG.</p>
+            <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>All images must be PNG.</p>
           }
           @if (images.errors?.['fileMaxSize']) {
-            <p class="mt-2 text-right text-lg text-red-400">
+            <p class="text-red-400 mt-2 text-right text-lg">
               <b>Error: </b>Maximum allowed image file size is {{ MAX_MAP_IMAGE_SIZE / (1024 * 1024) }} MiB.
             </p>
           }
           @if (images.errors?.['imageFileDimensionsError']) {
-            <p class="mt-2 text-right text-lg text-red-400">
+            <p class="text-red-400 mt-2 text-right text-lg">
               <b>Error: </b>All images must be 2560x1440 - use the mom_official_screenshot command!
             </p>
           }
           @if (images.errors?.['imageFileReadError']) {
-            <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>Bad image file.</p>
+            <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>Bad image file.</p>
           }
           @if (images.errors?.['fileReadError']) {
-            <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>Could not read file.</p>
+            <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>Could not read file.</p>
           }
         </div>
       </div>
@@ -218,21 +218,21 @@
 
     <div class="flex flex-col">
       <div class="z-10 -mb-12 ml-4 mt-12 flex items-center gap-4">
-        <div class="stack rounded border border-white border-opacity-20 bg-gray-800 bg-opacity-25 p-2 shadow backdrop-blur">
+        <div class="stack bg-gray-800 rounded border border-white border-opacity-20 bg-opacity-25 p-2 shadow backdrop-blur">
           <m-icon
-            class="scale-0 text-3xl text-green-500 transition-transform"
+            class="text-green-500 scale-0 text-3xl transition-transform"
             [icon]="'check-outline'"
             [ngClass]="{ 'scale-100': credits.valid && credits.dirty }"
             mTooltip="Section is complete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-red-500 transition-transform"
+            class="text-red-500 scale-0 text-3xl transition-transform"
             [icon]="'alert-outline'"
             [ngClass]="{ 'scale-100': credits.invalid && credits.dirty }"
             mTooltip="Section contains invalid items!"
           />
           <m-icon
-            class="scale-0 text-3xl text-blue-400 transition-transform"
+            class="text-blue-400 scale-0 text-3xl transition-transform"
             [icon]="'pencil-outline'"
             [ngClass]="{ 'scale-100': credits.pristine }"
             mTooltip="Section is incomplete!"
@@ -258,27 +258,27 @@
 
     <div class="flex flex-col">
       <div class="z-10 -mb-12 ml-4 mt-12 flex items-center gap-4">
-        <div class="stack rounded border border-white border-opacity-20 bg-gray-800 bg-opacity-25 p-2 shadow backdrop-blur">
+        <div class="stack bg-gray-800 rounded border border-white border-opacity-20 bg-opacity-25 p-2 shadow backdrop-blur">
           <m-icon
-            class="scale-0 text-3xl text-green-500 transition-transform"
+            class="text-green-500 scale-0 text-3xl transition-transform"
             [icon]="'check-outline'"
             [ngClass]="{ 'scale-100': suggestions.valid }"
             mTooltip="Section is complete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-red-500 transition-transform"
+            class="text-red-500 scale-0 text-3xl transition-transform"
             [icon]="'alert-outline'"
             [ngClass]="{ 'scale-100': suggestions.dirty && suggestions.invalid }"
             mTooltip="Section contains invalid items!"
           />
           <m-icon
-            class="scale-0 text-3xl text-blue-400 transition-transform"
+            class="text-blue-400 scale-0 text-3xl transition-transform"
             [icon]="'pencil-outline'"
             [ngClass]="{ 'scale-100': suggestions.pristine && suggestions.invalid && suggestions.enabled }"
             mTooltip="Section is incomplete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-orange-400 transition-transform"
+            class="text-orange-400 scale-0 text-3xl transition-transform"
             [icon]="'lock-outline'"
             [ngClass]="{ 'scale-100': suggestions.disabled }"
             mTooltip="Add a zones file to enable leaderboard editing!"
@@ -300,28 +300,28 @@
         </p>
         <m-map-leaderboards-selection [formControl]="suggestions" />
         @if (suggestions.dirty && suggestions.errors) {
-          <p class="my-2 ml-auto text-right text-lg text-red-400"><b>Error: </b>{{ suggestions.errors['error'] }}</p>
+          <p class="text-red-400 my-2 ml-auto text-right text-lg"><b>Error: </b>{{ suggestions.errors['error'] }}</p>
         }
       </div>
     </div>
 
     <div class="flex flex-col">
       <div class="z-10 -mb-12 ml-4 mt-12 flex items-center gap-4">
-        <div class="stack rounded border border-white border-opacity-20 bg-gray-800 bg-opacity-25 p-2 shadow backdrop-blur">
+        <div class="stack bg-gray-800 rounded border border-white border-opacity-20 bg-opacity-25 p-2 shadow backdrop-blur">
           <m-icon
-            class="scale-0 text-3xl text-green-500 transition-transform"
+            class="text-green-500 scale-0 text-3xl transition-transform"
             [icon]="'check-outline'"
             [ngClass]="{ 'scale-100': privateTesting.valid }"
             mTooltip="Section is complete!"
           />
           <m-icon
-            class="scale-0 text-3xl text-red-500 transition-transform"
+            class="text-red-500 scale-0 text-3xl transition-transform"
             [icon]="'alert-outline'"
             [ngClass]="{ 'scale-100': testInvites.dirty && privateTesting.invalid }"
             mTooltip="Section contains invalid items!"
           />
           <m-icon
-            class="scale-0 text-3xl text-blue-400 transition-transform"
+            class="text-blue-400 scale-0 text-3xl transition-transform"
             [icon]="'pencil-outline'"
             [ngClass]="{ 'scale-100': !testInvites.dirty && privateTesting.invalid }"
             mTooltip="Section is incomplete!"
@@ -356,11 +356,11 @@
                 <input type="checkbox" class="checkbox" [formControl]="wantsPrivateTesting" />
               </div>
               @if (testInvites.dirty && privateTesting.errors) {
-                <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>{{ privateTesting.errors['error'] }}</p>
+                <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>{{ privateTesting.errors['error'] }}</p>
               }
             </div>
           </div>
-          <span class="h-[0.125rem] bg-gray-700 lg:h-auto lg:w-[0.125rem]"></span>
+          <span class="bg-gray-700 h-[0.125rem] lg:h-auto lg:w-[0.125rem]"></span>
           <m-map-test-invite-selection [formControl]="testInvites" class="disabled:opacity-25 lg:flex-grow" />
         </div>
       </div>

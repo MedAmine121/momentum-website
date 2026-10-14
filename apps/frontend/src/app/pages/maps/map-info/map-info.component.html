@@ -4,7 +4,7 @@
       <!-- This negative margin is pretty evil, breaking the standard <main>
            padding. But vertical space is so precious here! -->
       <div class="flex min-w-0 flex-[1_1_auto] flex-col lg:-mt-4 lg:h-24">
-        <p class="card-title -mb-1 mt-auto text-[1.5rem] text-gray-200 lg:text-[2rem]">{{ prefix }}</p>
+        <p class="card-title text-gray-200 -mb-1 mt-auto text-[1.5rem] lg:text-[2rem]">{{ prefix }}</p>
         <p
           class="card-title [--font-lerp-scale:0.8] lg:[--font-lerp-scale:1]"
           [fontSizeLerp]="{ chars: name.length, startAt: 12, baseRem: 4.5 }"
@@ -13,7 +13,7 @@
         </p>
       </div>
       <button type="button" class="mt-auto flex flex-[0_0_auto]" (click)="toggleMapBackground()" mTooltip="Toggle map backgrounds">
-        <m-icon class="text-2xl text-gray-200 drop-shadow transition-colors hover:text-gray-50" icon="panorama" />
+        <m-icon class="text-gray-200 hover:text-gray-50 text-2xl drop-shadow transition-colors" icon="panorama" />
       </button>
     </div>
     <!-- Below lg this wrapper disappears, so its children can be reordered with the rest of the grid: the action buttons
@@ -23,7 +23,7 @@
         @for (section of sections; track $index) {
           <button
             type="button"
-            class="justify-self-start font-display text-3xl font-bold leading-none text-gray-100 opacity-90 drop-shadow transition-colors hover:text-gray-50 lg:text-4xl"
+            class="text-gray-100 hover:text-gray-50 justify-self-start font-display text-3xl font-bold leading-none opacity-90 drop-shadow transition-colors lg:text-4xl"
             [ngClass]="{ '!text-white !opacity-100': currentSection === section }"
             (click)="currentSection = section"
           >
@@ -51,7 +51,7 @@
             </a>
             <m-popover #downloadOverlay anchorName="--download-anchor">
               <div class="max-w-lg">
-                <p class="mb-1 text-sm italic text-gray-200">
+                <p class="text-gray-200 mb-1 text-sm italic">
                   For convenience we recommend downloading and launching maps through the in-game map browser!
                 </p>
                 <p>
@@ -184,7 +184,7 @@
 
         @if (inSubmission) {
           <div
-            class="flex justify-center gap-2 bg-purple-500 bg-opacity-50 py-3 [border-bottom:1px_solid_rgb(0_0_0/0.2)] [border-inline:1px_solid_rgb(255_255_255/0.075)] [border-top:1px_solid_rgb(255_255_255/0.05)]"
+            class="bg-purple-500 flex justify-center gap-2 bg-opacity-50 py-3 [border-bottom:1px_solid_rgb(0_0_0/0.2)] [border-inline:1px_solid_rgb(255_255_255/0.075)] [border-top:1px_solid_rgb(255_255_255/0.05)]"
           >
             <p>In Submission -</p>
             <i>{{ MapStatusName.get(map.status) }}</i>
@@ -195,7 +195,7 @@
             />
           </div>
         } @else if (map.status === MapStatus.DISABLED) {
-          <div class="flex flex-col items-center gap-2 border border-red-500 bg-red-500 bg-opacity-50 p-3 text-center">
+          <div class="border-red-500 bg-red-500 flex flex-col items-center gap-2 border bg-opacity-50 p-3 text-center">
             <b>Map Disabled</b>
             @if (map.currentVersion?.bspHash) {
               <i>This map is currently disabled. It's only visible to moderators and admins, and can only be re-enabled by admins.</i>
@@ -216,7 +216,7 @@
             <ng-template #creditBlock let-type="type">
               @if (credits?.get(type).length > 0) {
                 <div>
-                  <p class="font-sm mb-1 font-bold uppercase text-gray-200">
+                  <p class="font-sm text-gray-200 mb-1 font-bold uppercase">
                     {{ MapCreditNames.get(type) }}
                   </p>
                   <div class="grid grid-cols-2 place-items-start gap-1">

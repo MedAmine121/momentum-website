@@ -6,7 +6,7 @@
       <m-icon icon="shield-star" class="text-red-400" mTooltip="Review requires resolving. The map cannot be approved until resolved." />
     } @else if (review.resolved === true) {
       <div class="h-[1px] basis-4 bg-white bg-opacity-20"></div>
-      <m-icon icon="shield-check" class="mr-1.5 text-blue-400" />
+      <m-icon icon="shield-check" class="text-blue-400 mr-1.5" />
       <p class="mr-2 text-sm italic">Resolved by</p>
       <m-user [user]="review.resolver" avatarClass="!h-5" aliasClass="font-normal text-sm mr-1" />
     }
@@ -19,20 +19,18 @@
                a component for displaying it. Not at all hard, low priority so leaving for now. -->
     <!-- prettier-ignore -->
     <p class="text-sm italic text-gray-100">
-      Posted <span
-      class="font-medium">{{ review.createdAt | date:"MMM dd, hh:mm a"}}</span>@if
-    (review.editHistory?.length > 1) {, edited <span
-      class="font-medium">{{ review.editHistory.at(-1).date |
-      date:"MMM dd, hh:mm a" }}</span>}
+      Posted <span class="font-medium">{{ review.createdAt | date:"MMM dd, hh:mm a"}}</span>@if
+      (review.editHistory?.length > 1) {, edited <span class="font-medium">{{ review.editHistory.at(-1).date |
+        date:"MMM dd, hh:mm a" }}</span>}
     </p>
     @if (isReviewAuthor) {
       <button class="ml-2" type="button" (click)="enableEditing()" mTooltip="Edit review">
-        <m-icon icon="pencil" class="my-auto block text-base text-blue-500 transition-colors hover:text-blue-400" />
+        <m-icon icon="pencil" class="text-blue-500 hover:text-blue-400 my-auto block text-base transition-colors" />
       </button>
     }
     @if (isModOrAdmin || isReviewAuthor) {
       <button class="ml-2" type="button" (click)="deleteReview($event)" mTooltip="Delete review">
-        <m-icon icon="delete" class="text-shadow my-auto block text-base text-red-500 transition-colors hover:text-red-400" />
+        <m-icon icon="delete" class="text-shadow text-red-500 hover:text-red-400 my-auto block text-base transition-colors" />
       </button>
     }
   </legend>
@@ -45,18 +43,18 @@
         <div
           class="grid grid-flow-row grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-4 max-md:gap-y-1 md:grid-cols-[auto_auto_auto_minmax(auto,1fr)] md:gap-x-5"
         >
-          <p class="text-sm font-medium uppercase text-gray-200">Suggestions</p>
-          <p class="justify-self-center text-sm font-medium uppercase text-gray-250">Tier</p>
-          <p class="justify-self-center text-sm font-medium uppercase text-gray-250">Rating</p>
-          <p class="text-sm font-medium uppercase text-gray-250 max-md:hidden">Tags</p>
+          <p class="text-gray-200 text-sm font-medium uppercase">Suggestions</p>
+          <p class="text-gray-250 justify-self-center text-sm font-medium uppercase">Tier</p>
+          <p class="text-gray-250 justify-self-center text-sm font-medium uppercase">Rating</p>
+          <p class="text-gray-250 text-sm font-medium uppercase max-md:hidden">Tags</p>
 
           @for (gamemode of suggestions | unsortedKeyvalue; track $index) {
             @if (gamemode.value.get(TrackType.MAIN)?.[0]; as mainSugg) {
-              <p class="text-sm text-gray-50">{{ GamemodeInfo.get(gamemode.key).name }} - Main</p>
+              <p class="text-gray-50 text-sm">{{ GamemodeInfo.get(gamemode.key).name }} - Main</p>
               <p class="justify-self-center text-sm font-medium">{{ mainSugg.tier ?? '' }}</p>
               <p class="justify-self-center text-sm font-medium">{{ mainSugg.gameplayRating ?? '' }}</p>
               <p
-                class="text-sm text-gray-50 max-md:col-span-full max-md:mb-1 max-md:before:text-gray-250 max-md:before:content-['Tags:_']"
+                class="text-gray-50 max-md:before:text-gray-250 text-sm max-md:col-span-full max-md:mb-1 max-md:before:content-['Tags:_']"
                 [class]="!mainSugg.tags?.length ? 'max-md:hidden' : ''"
               >
                 {{ mainSugg.tags?.map(mapTagEnglishName)?.join(', ') }}
@@ -64,11 +62,11 @@
             }
 
             @for (bonus of gamemode.value.get(TrackType.BONUS); track $index) {
-              <p class="text-sm text-gray-50">{{ GamemodeInfo.get(gamemode.key).name }} - Bonus {{ bonus.trackNum }}</p>
+              <p class="text-gray-50 text-sm">{{ GamemodeInfo.get(gamemode.key).name }} - Bonus {{ bonus.trackNum }}</p>
               <p class="justify-self-center font-medium">{{ bonus.tier ?? '' }}</p>
               <p class="justify-self-center font-medium">{{ bonus.gameplayRating ?? '' }}</p>
               <p
-                class="text-sm text-gray-50 max-md:col-span-full max-md:mb-1 max-md:before:text-gray-250 max-md:before:content-['Tags:_']"
+                class="text-gray-50 max-md:before:text-gray-250 text-sm max-md:col-span-full max-md:mb-1 max-md:before:content-['Tags:_']"
                 [class]="!bonus.tags?.length ? 'max-md:hidden' : ''"
               >
                 {{ bonus.tags?.map(mapTagEnglishName)?.join(', ') }}
@@ -107,7 +105,7 @@
     <div class="my-2 h-[1px] w-full bg-white bg-opacity-10"></div>
 
     @if (review.numComments > review.comments.length) {
-      <p class="px-1 text-sm italic text-gray-100">
+      <p class="text-gray-100 px-1 text-sm italic">
         {{ review.numComments - review.comments.length | plural: 'additional comment' }} -
         <button type="button" class="link font-medium italic" (click)="loadComments.next()">Load more</button>
       </p>
@@ -125,11 +123,11 @@
               [badges]="true"
               badgesClass="h-4"
             />
-            <p class="self-end pb-[1px] text-sm italic text-gray-200">{{ comment.createdAt | date: 'MMM dd, yyyy hh:mm a' }}</p>
+            <p class="text-gray-200 self-end pb-[1px] text-sm italic">{{ comment.createdAt | date: 'MMM dd, yyyy hh:mm a' }}</p>
             @if (isCommentAuthor(comment.user.id)) {
               <button
                 type="button"
-                class="text-blue-500 transition-colors hover:text-blue-400"
+                class="text-blue-500 hover:text-blue-400 transition-colors"
                 (click)="initEditComment(comment.id)"
                 mTooltip="Edit"
               >
@@ -139,7 +137,7 @@
             @if (isModOrAdmin || isCommentAuthor(comment.user.id)) {
               <button
                 type="button"
-                class="text-red-500 transition-colors hover:text-red-400"
+                class="text-red-500 hover:text-red-400 transition-colors"
                 (click)="deleteComment($event, comment.id)"
                 mTooltip="Delete"
               >
@@ -155,7 +153,7 @@
                 [formControl]="editForm.controls.textInput"
                 placeholder="Update comment"
                 class="textinput my-1 grow resize-none overflow-hidden px-2 py-1"
-                dynamicTextareaHeight
+                mDynamicTextareaHeight
               ></textarea>
               <div class="flex gap-1">
                 @if (MAX_REVIEW_COMMENT_LENGTH / 2 < editForm.value.textInput?.length) {
@@ -189,7 +187,7 @@
         [formControl]="commentInput.controls.textInput"
         placeholder="Leave a comment"
         class="textinput min-w-0 grow resize-none overflow-hidden px-2 py-1 max-md:basis-full"
-        dynamicTextareaHeight
+        mDynamicTextareaHeight
       ></textarea>
       @if (commentInput.dirty) {
         <div>

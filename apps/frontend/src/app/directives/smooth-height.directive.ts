@@ -16,7 +16,7 @@ import {
  *
  * Based on https://stackoverflow.com/a/52277742
  */
-@Directive({ selector: '[smoothHeight]', standalone: true })
+@Directive({ selector: '[mSmoothHeight]', standalone: true })
 export class SmoothHeightAnimDirective implements OnChanges {
   private readonly elRef = inject(ElementRef);
 

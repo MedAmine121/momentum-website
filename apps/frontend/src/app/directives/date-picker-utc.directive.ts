@@ -7,7 +7,7 @@ import { DatePicker as PDatePicker } from 'primeng/datepicker';
  * Doesn't support range or multiple selection.
  */
 @Directive({
-  selector: 'p-date-picker[utc]'
+  selector: 'p-date-picker[mUtc]'
 })
 export class DatePickerUTC {
   private host = inject(PDatePicker);

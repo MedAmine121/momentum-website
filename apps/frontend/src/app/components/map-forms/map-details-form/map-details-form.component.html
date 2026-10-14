@@ -17,7 +17,7 @@
           </div>
         </ng-template>
       </label>
-      <span class="text-sm italic leading-4 text-gray-200">Required </span>
+      <span class="text-gray-200 text-sm italic leading-4">Required </span>
     </div>
     <input
       id="name"
@@ -34,7 +34,7 @@
         <m-icon icon="tooltip-question-outline" class="mb-[1px] ml-0.5 align-middle" [mTooltip]="subType" />
         <ng-template #subType><m-submission-type-info /></ng-template>
       </label>
-      <span class="text-sm italic leading-4 text-gray-200">Required</span>
+      <span class="text-gray-200 text-sm italic leading-4">Required</span>
     </div>
     <p-select
       mTooltip
@@ -62,9 +62,9 @@
           </div>
         </ng-template>
       </label>
-      <span class="text-sm italic leading-4 text-gray-200">Required</span>
+      <span class="text-gray-200 text-sm italic leading-4">Required</span>
     </div>
-    <p-date-picker id="creationDate" class="w-full [&>*]:w-full" [maxDate]="maxDate" [formControl]="creationDate" appendTo="body" utc />
+    <p-date-picker id="creationDate" class="w-full [&>*]:w-full" [maxDate]="maxDate" [formControl]="creationDate" appendTo="body" mUtc />
     <label for="youtubeID" class="my-auto text-lg leading-4">
       Youtube ID
       <m-icon icon="tooltip-question-outline" class="mb-[1px] ml-0.5 align-middle" [mTooltip]="youtubeIDInfo" />

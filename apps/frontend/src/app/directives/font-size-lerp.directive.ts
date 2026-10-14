@@ -11,9 +11,9 @@ import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
  * I couldn't get them working very well, so this is good enough for the time
  * being.
  */
-@Directive({ selector: '[fontSizeLerp]', standalone: true })
+@Directive({ selector: '[mFontSizeLerp]', standalone: true })
 export class FontSizeLerpDirective implements OnChanges {
-  @Input('fontSizeLerp') options: {
+  @Input() fontSizeLerp: {
     chars: number;
     startAt: number;
     baseRem: number;
@@ -22,7 +22,7 @@ export class FontSizeLerpDirective implements OnChanges {
   @HostBinding('style.font-size') fontSize: string;
 
   ngOnChanges() {
-    const { chars, startAt, baseRem } = this.options;
+    const { chars, startAt, baseRem } = this.fontSizeLerp;
     let val = baseRem;
     if (chars > startAt) {
       val = (baseRem * startAt) / chars;

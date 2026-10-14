@@ -6,7 +6,7 @@
       class="textinput grow resize-none overflow-hidden"
       rows="6"
       (keydown.control.enter)="submit()"
-      dynamicTextareaHeight
+      mDynamicTextareaHeight
     ></textarea>
     @if (!editing) {
       <m-multi-file-upload
@@ -28,7 +28,7 @@
 
   <m-map-review-suggestions-form #suggs [formControl]="suggestions" [map]="map" />
   @if (suggestions.invalid) {
-    <p class="medium mb-2 ml-auto font-medium italic text-red-500">{{ suggestions.errors['error'] }}</p>
+    <p class="medium text-red-500 mb-2 ml-auto font-medium italic">{{ suggestions.errors['error'] }}</p>
   }
 
   <div class="flex flex-wrap items-center justify-end gap-2">

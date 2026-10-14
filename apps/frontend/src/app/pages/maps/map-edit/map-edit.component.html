@@ -11,7 +11,7 @@
   [mSpinner]="loading"
   class="card card--fancy my-8 flex-col overflow-visible p-4"
   [ngClass]="isModOrAdmin || isSubmitter ? '!flex' : '!hidden'"
-  preventEnterSubmit
+  mPreventEnterSubmit
 >
   <div class="card-title -mt-10 mb-2 text-4xl md:text-5xl">Submit New Version</div>
   <div class="flex flex-col gap-4 lg:flex-row">
@@ -43,7 +43,7 @@
     <div class="flex min-w-0 grow flex-col gap-2 lg:w-2/3">
       <div class="flex items-center gap-2">
         <p class="text-lg">Changelog</p>
-        <span class="text-sm italic text-gray-200">Required</span>
+        <span class="text-gray-200 text-sm italic">Required</span>
       </div>
       <textarea class="textinput textinput-validated mb-2 w-full" rows="8" [formControl]="changelog"></textarea>
       <div class="flex flex-col gap-4 md:flex-row">
@@ -89,7 +89,7 @@
   [mSpinner]="loading"
   class="card card--fancy mb-8 mt-14 flex-col gap-8 overflow-visible p-4"
   [ngClass]="isModOrAdmin || isSubmitter || isReviewer ? '!flex' : '!hidden'"
-  preventEnterSubmit
+  mPreventEnterSubmit
 >
   <p class="card-title -mb-4 -mt-9 text-4xl md:text-5xl">Update Map</p>
 
@@ -110,24 +110,24 @@
     <legend class="font-display text-4xl font-bold">Images</legend>
     <m-map-image-selection [formControlPassthrough]="images" icon="image-multiple-outline" [previewFullscreenBackground]="true" />
     @if (images.errors?.['required'] && images.dirty) {
-      <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>Must include at least a thumbnail image.</p>
+      <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>Must include at least a thumbnail image.</p>
     }
     @if (images.errors?.['fileExtension']) {
-      <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>All images must be PNG.</p>
+      <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>All images must be PNG.</p>
     }
     @if (images.errors?.['fileMaxSize']) {
-      <p class="mt-2 text-right text-lg text-red-400">
+      <p class="text-red-400 mt-2 text-right text-lg">
         <b>Error: </b>Maximum allowed image file size is {{ MAX_MAP_IMAGE_SIZE / (1024 * 1024) }} MiB.
       </p>
     }
     @if (images.errors?.['imageFileDimensionsError']) {
-      <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>All images must be 2560x1440 - use the TODO!!! command!</p>
+      <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>All images must be 2560x1440 - use the TODO!!! command!</p>
     }
     @if (images.errors?.['imageFileReadError']) {
-      <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>Bad image file.</p>
+      <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>Bad image file.</p>
     }
     @if (images.errors?.['fileReadError']) {
-      <p class="mt-2 text-right text-lg text-red-400"><b>Error: </b>Could not read file.</p>
+      <p class="text-red-400 mt-2 text-right text-lg"><b>Error: </b>Could not read file.</p>
     }
   </fieldset>
 
@@ -141,9 +141,9 @@
     <legend class="font-display text-4xl font-bold">Leaderboards</legend>
     <m-map-leaderboards-selection [wasApproved]="wasApproved" [mapLeaderboards]="map.leaderboards" [formControl]="formControl" />
     @if (formControl.dirty && formControl.errors) {
-      <p class="my-2 ml-auto text-right text-lg text-red-400"><b>Error: </b>{{ formControl.errors['error'] }}</p>
+      <p class="text-red-400 my-2 ml-auto text-right text-lg"><b>Error: </b>{{ formControl.errors['error'] }}</p>
     } @else if (formControl.pristine && formControl.errors) {
-      <p class="mb-1 ml-auto text-right text-lg text-red-400">
+      <p class="text-red-400 mb-1 ml-auto text-right text-lg">
         <span class="font-medium"
           >Your latest zones don't match with your suggestions, you'll need to update them before you can update the map. </span
         ><b>Error: </b> >{{ formControl.errors['error'] }}
