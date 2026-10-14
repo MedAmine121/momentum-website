@@ -35,7 +35,7 @@ export function readHeader(buffer: Readonly<Buffer>): ReplayHeader {
       // tempEntClassBits: buffer.readUint8(193),
       style: buffer.readUInt8(194)
     };
-  } catch (error) {
+  } catch (error: any) {
     throw new ReplayReadError(error.code, error.message);
   }
 }
@@ -54,8 +54,8 @@ export function readRunSplits(buffer: Readonly<Buffer>): RunSplits.Splits {
       REPLAY_SPLITS_OFFSET + length
     );
     lastChar = buffer.readUInt8(REPLAY_SPLITS_OFFSET + length);
-  } catch (error) {
-    throw new ReplayReadError(error.code, error.message);
+  } catch (error: any) {
+    throw new ReplayReadError(error.message, error.code);
   }
 
   if (splits.length !== length || splits.at(-1) !== '}' || lastChar !== 0x00) {
@@ -72,7 +72,7 @@ export class ReplayReadError extends Error {
   constructor(message: string, code?: string) {
     super();
     this.message = message;
-    this.code = code;
+    this.code = code ?? '';
     this.name = 'ReplayReadError';
   }
 }

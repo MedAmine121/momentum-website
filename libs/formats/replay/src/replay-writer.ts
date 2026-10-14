@@ -25,8 +25,8 @@ export function writeHeader(header: ReplayHeader, buffer: Buffer): void {
     buffer.writeUInt8(header.trackNum, 168);
     buffer.writeDoubleLE(header.runTime, 169);
     buffer.writeUInt8(header.style, 194);
-  } catch (error) {
-    throw new ReplayWriteError(error.code, error.message);
+  } catch (error: any) {
+    throw new ReplayWriteError(error.message, error.code);
   }
 }
 
@@ -40,8 +40,8 @@ export function writeRunSplits(splits: RunSplits.Splits, buffer: Buffer): void {
     buffer.writeInt32LE(splitsStr.length + 1, REPLAY_HEADER_SIZE);
     buffer.write(splitsStr, REPLAY_SPLITS_OFFSET, splitsStr.length, 'utf8');
     buffer.writeUInt8(0x00, REPLAY_SPLITS_OFFSET + splitsStr.length);
-  } catch (error) {
-    throw new ReplayWriteError(error.code, error.message);
+  } catch (error: any) {
+    throw new ReplayWriteError(error.message, error.code);
   }
 }
 
@@ -52,7 +52,7 @@ export class ReplayWriteError extends Error {
   constructor(message: string, code?: string) {
     super();
     this.message = message;
-    this.code = code;
+    this.code = code ?? '';
     this.name = 'ReplayWriteError';
   }
 }
