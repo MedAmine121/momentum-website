@@ -12,24 +12,28 @@ export function deepEquals<T>(a: T, b: T): boolean {
   if (a && b && typeof a == 'object' && typeof b == 'object') {
     if (a.constructor !== b.constructor) return false;
 
-    let length, i;
+    let length: number, i: number;
     if (Array.isArray(a)) {
-      length = a.length;
-      if (length !== (b as unknown[])?.length) return false;
-      for (i = length; i-- !== 0; ) if (!deepEquals(a[i], b[i])) return false;
+      const arrA = a as unknown[];
+      const arrB = b as unknown[];
+      length = arrA.length;
+      if (length !== arrB.length) return false;
+      for (i = length; i-- !== 0;)
+        if (!deepEquals(arrA[i], arrB[i])) return false;
       return true;
     }
-
+    let entry: any;
     if (a instanceof Map && b instanceof Map) {
       if (a.size !== b.size) return false;
-      for (i of a.entries()) if (!b.has(i[0])) return false;
-      for (i of a.entries()) if (!deepEquals(i[1], b.get(i[0]))) return false;
+      for (entry of a.entries()) if (!b.has(entry[0])) return false;
+      for (entry of a.entries())
+        if (!deepEquals(entry[1], b.get(entry[0]))) return false;
       return true;
     }
 
     if (a instanceof Set && b instanceof Set) {
       if (a.size !== b.size) return false;
-      for (i of a.entries()) if (!b.has(i[0])) return false;
+      for (entry of a.entries()) if (!b.has(entry[0])) return false;
       return true;
     }
 
@@ -48,14 +52,16 @@ export function deepEquals<T>(a: T, b: T): boolean {
       return a.toString() === b.toString();
 
     const keys = Object.keys(a);
+    const objA = a as { [key: string]: unknown };
+    const objB = b as { [key: string]: unknown };
     length = keys.length;
     if (length !== Object.keys(b).length) return false;
 
-    for (i = length; i-- !== 0; )
+    for (i = length; i-- !== 0;)
       if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
 
-    for (i = length; i-- !== 0; )
-      if (!deepEquals(a[keys[i]], b[keys[i]])) return false;
+    for (i = length; i-- !== 0;)
+      if (!deepEquals(objA[keys[i]], objB[keys[i]])) return false;
 
     return true;
   }

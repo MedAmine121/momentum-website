@@ -87,7 +87,8 @@ export function expandToIncludes<
       const mapping = options.mappings.find((x) => x.expand === expansion);
       if (mapping) {
         includes[
-          (mapping as { expand: string; model: string }).model ?? expansion
+          ((mapping as { expand: string; model: string }).model ??
+            expansion) as keyof ModelInclude
         ] =
           mapping.value !== undefined
             ? mapping.value
@@ -96,10 +97,10 @@ export function expandToIncludes<
               // always be a valid `include` value to Prisma.
               (true as any);
       } else {
-        includes[expansion] = true;
+        includes[expansion as keyof ModelInclude] = true as any;
       }
     } else {
-      includes[expansion] = true;
+      includes[expansion as keyof ModelInclude] = true as any;
     }
   }
 
