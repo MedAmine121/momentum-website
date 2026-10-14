@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'xp-systems',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',

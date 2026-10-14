@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'formats/bsp',
   preset: '../../../jest.preset.js',
   testEnvironment: 'node',

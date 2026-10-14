@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'bitflags',
   preset: '../../jest.preset.js',
   transform: {

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'formats/zone',
   preset: '../../../jest.preset.js',
   testEnvironment: 'node',

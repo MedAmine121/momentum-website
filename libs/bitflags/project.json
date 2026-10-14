@@ -16,10 +16,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "inputs": [
+        "default",
+        "^default",
+        "{workspaceRoot}/eslint.config.mjs",
+        "{workspaceRoot}/tools/eslint-rules/**/*"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/bitflags/**/*.ts"]
+        "args": ["**/*.ts"]
       }
     },
     "test": {

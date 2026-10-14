@@ -23,10 +23,6 @@
           "ci": true
         }
       }
-    },
-    "@nx/eslint:lint": {
-      "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"],
-      "cache": true
     }
   },
   "namedInputs": {
@@ -113,5 +109,30 @@
   "neverConnectToCloud": true,
   "tui": {
     "enabled": false
-  }
+  },
+  "analytics": true,
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      },
+      "include": [
+        "apps/backend/**/*",
+        "apps/backend-e2e/**/*",
+        "apps/discord-bot-internal/**/*",
+        "apps/frontend/**/*",
+        "libs/bitflags/**/*",
+        "libs/constants/**/*",
+        "libs/db/**/*",
+        "libs/enum/**/*",
+        "libs/formats/bsp/**/*",
+        "libs/formats/replay/**/*",
+        "libs/formats/zone/**/*",
+        "libs/random/**/*",
+        "libs/util-fn/**/*",
+        "libs/xp-systems/**/*"
+      ]
+    }
+  ]
 }
