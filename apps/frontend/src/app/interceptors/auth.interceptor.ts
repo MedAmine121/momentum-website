@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
-  HttpEvent,
-  HttpInterceptor
+  type HttpEvent,
+  type HttpInterceptor
 } from '@angular/common/http';
 import { BehaviorSubject, EMPTY, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';

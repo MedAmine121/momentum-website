@@ -1,7 +1,14 @@
 import { Tooltip as PTooltip, TooltipStyle } from 'primeng/tooltip';
-import { Directive, Input, QueryList, TemplateRef } from '@angular/core';
-import { UniqueComponentId } from 'primeng/utils';
+import {
+  Directive,
+  Input,
+  QueryList,
+  TemplateRef,
+  input,
+  signal
+} from '@angular/core';
 import { DomHandler } from 'primeng/dom';
+import type { TooltipEvent, TooltipPosition } from 'primeng/types/tooltip';
 
 /**
  * Overriden PrimeNG Tooltip directive adding extra utilities for
@@ -24,15 +31,15 @@ export class TooltipDirective extends PTooltip {
    *
    * @default hover
    */
-  @Input() override tooltipEvent: 'hover' | 'focus' | 'noop' | any = 'hover';
+  override tooltipEvent = input<TooltipEvent | 'noop' | any>('hover');
 
   /**
    * Content of the tooltip.
    */
-  @Input('mTooltip') override content:
-    | string
-    | TemplateRef<HTMLElement>
-    | undefined = undefined;
+  override content = input<string | TemplateRef<HTMLElement> | undefined>(
+    undefined,
+    { alias: 'mTooltip' }
+  );
 
   /**
    * String by which to distuingish multiple instances in a QueryList
@@ -42,31 +49,16 @@ export class TooltipDirective extends PTooltip {
   /**
    * Overriden position to make `top` the default.
    */
-  @Input() override tooltipPosition: 'top' | 'left' | 'right' | 'bottom' =
-    'top';
+  override tooltipPosition = input<TooltipPosition | undefined>('top');
 
-  // Needed to actually override.
-  //
-  // https://github.com/primefaces/primeng/blob/master/src/app/components/tooltip/tooltip.ts#L117
-  override _tooltipOptions = {
-    tooltipLabel: null,
-    tooltipPosition: 'top', // PrimeNG has this as 'right'.
-    tooltipEvent: 'hover',
-    appendTo: 'body',
-    positionStyle: null,
-    tooltipStyleClass: null,
-    tooltipZIndex: 'auto',
-    escape: true,
-    disabled: null,
-    showDelay: null,
-    hideDelay: null,
-    positionTop: null,
-    positionLeft: null,
-    life: null,
-    autoHide: true,
-    hideOnEscape: true,
-    id: UniqueComponentId() + '_tooltip'
-  };
+  private readonly dynamicContent = signal<string | null>(null);
+
+  override getOption(option: string) {
+    if (option === 'tooltipLabel') {
+      return this.dynamicContent() ?? super.getOption(option);
+    }
+    return super.getOption(option);
+  }
 
   override alignTop() {
     this.preAlign('top');
@@ -174,13 +166,18 @@ export class TooltipDirective extends PTooltip {
    * if just `true` is given, shows for 2s.
    */
   setAndShow(content: string, duration?: number | true): void {
-    this.content = content;
-    this.setOption({ tooltipLabel: content });
+    this.dynamicContent.set(content);
     this.show();
 
     // Not messing with underlying tooltipOptions.life stuff, badly documented
     // and can't get to work well.
     if (duration)
-      setTimeout(() => this.hide(), duration === true ? 2000 : duration);
+      setTimeout(
+        () => {
+          this.hide();
+          this.dynamicContent.set(null);
+        },
+        duration === true ? 2000 : duration
+      );
   }
 }

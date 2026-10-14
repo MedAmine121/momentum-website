@@ -17,7 +17,7 @@
           <div class="flex flex-wrap gap-1">
             <h1
               class="flex flex-grow items-center gap-2 font-medium [--font-lerp-scale:0.8] md:[--font-lerp-scale:1]"
-              [fontSizeLerp]="{ chars: user.alias.length, startAt: 16, baseRem: 2.25 }"
+              [mFontSizeLerp]="{ chars: user.alias.length, startAt: 16, baseRem: 2.25 }"
             >
               {{ user.alias }}
               @if (user.country && user.country.length === 2) {
@@ -25,7 +25,7 @@
               }
               @if (!hasRole(Role.PLACEHOLDER) && !hasRole(Role.DELETED)) {
                 <a href="https://steamcommunity.com/profiles/{{ user.steamID }}" target="_blank" mTooltip="Steam Profile">
-                  <m-icon class="h-7 w-7 text-gray-50 transition duration-100 ease-out hover:text-blue-500" icon="steam" pack="si" />
+                  <m-icon class="text-gray-50 hover:text-blue-500 h-7 w-7 transition duration-100 ease-out" icon="steam" pack="si" />
                 </a>
               }
             </h1>
@@ -81,7 +81,7 @@
             <div class="flex w-full gap-2 font-display text-2xl">
               <div class="flex-grow">
                 <p class="pb-1 leading-none">{{ xp - currLevelXp }} / {{ nextLevelXp - currLevelXp }} xp</p>
-                <p-progressBar class="h-2 w-full" [showValue]="false" [value]="(100 * (xp - currLevelXp)) / (nextLevelXp - currLevelXp)" />
+                <p-progressbar class="h-2 w-full" [showValue]="false" [value]="(100 * (xp - currLevelXp)) / (nextLevelXp - currLevelXp)" />
               </div>
               <m-level-indicator class="mt-auto" [totalLevel]="user.userStats.level" />
             </div>
@@ -97,7 +97,7 @@
             @for (social of user.profile.socials | unsortedKeyvalue; track social) {
               @if (social.value) {
                 <a
-                  class="m-1 overflow-hidden text-ellipsis whitespace-nowrap transition duration-100 ease-out hover:!text-blue-500"
+                  class="hover:!text-blue-500 m-1 overflow-hidden text-ellipsis whitespace-nowrap transition duration-100 ease-out"
                   href="https://{{ SocialsData[social.key].url }}/{{ social.value }}"
                   target="_blank"
                   [mTooltip]="social.key"
@@ -134,7 +134,7 @@
             }
           </div>
           @if (!hasRole(Role.PLACEHOLDER) && !hasRole(Role.DELETED)) {
-            <div class="h-[1px] bg-gray-400 sm:h-auto sm:w-[1px]"></div>
+            <div class="bg-gray-400 h-[1px] sm:h-auto sm:w-[1px]"></div>
             <div class="min-w-0 flex-grow basis-0">
               <h3 class="font-display font-bold">Following ({{ followingUsers.length }})</h3>
               @if (followingUsers.length === 0) {
@@ -237,7 +237,7 @@
                 @for (type of MapCreditType | enumValue; track $index) {
                   @if (creditMap[type]) {
                     <div>
-                      <p class="font-sm mb-1 font-bold uppercase text-gray-200">
+                      <p class="font-sm text-gray-200 mb-1 font-bold uppercase">
                         {{ MapCreditNames.get(type) }}
                       </p>
                       @for (credit of creditMap[type]; track $index) {

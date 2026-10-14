@@ -60,7 +60,11 @@ import { firstValueFrom, lastValueFrom, merge, Subject } from 'rxjs';
 import { deepEquals, isEmpty } from '@momentum/util-fn';
 import { SuggestionType } from '@momentum/formats/zone';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
+import {
+  HttpClient,
+  type HttpEvent,
+  HttpEventType
+} from '@angular/common/http';
 import { ConfirmDeactivate } from '../../../guards/component-can-deactivate.guard';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TitleService } from '../../../services/title.service';

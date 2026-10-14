@@ -23,7 +23,7 @@ import {
   UpdateChatBan
 } from '@momentum/constants';
 import { HttpService } from './http.service';
-import { HttpEvent } from '@angular/common/http';
+import type { HttpEvent } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {

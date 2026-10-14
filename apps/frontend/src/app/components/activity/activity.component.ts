@@ -3,7 +3,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges,
+  type SimpleChanges,
   inject
 } from '@angular/core';
 import {
@@ -68,10 +68,7 @@ export class ActivityComponent implements OnInit, OnChanges {
    *  all: BehaviorSubject<User> of a different user
    */
   @Input({ required: true }) activityFetchType!:
-    | 'follow'
-    | 'all'
-    | 'own'
-    | BehaviorSubject<User>;
+    'follow' | 'all' | 'own' | BehaviorSubject<User>;
 
   /**
    * The height of the activities list, needs to be a precise value due to

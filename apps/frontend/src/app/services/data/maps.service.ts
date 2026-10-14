@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map, catchError, of } from 'rxjs';
-import { HttpEvent } from '@angular/common/http';
+import type { HttpEvent } from '@angular/common/http';
 import {
   CreateMapCredit,
   MMap,

@@ -41,7 +41,7 @@ import {
   MMap
 } from '@momentum/constants';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { type HttpEvent, HttpEventType } from '@angular/common/http';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { MessageService } from 'primeng/api';
 import {

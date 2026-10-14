@@ -7,7 +7,7 @@ import {
   ZoneDiffValidationError,
   ZoneValidationError
 } from '@momentum/formats/zone';
-import { vdf, ParseError as VdfParseError } from 'fast-vdf';
+import * as vdf from 'fast-vdf';
 
 /**
  * Stronger version of ValidationErrors wherein each key has an array of
@@ -204,7 +204,7 @@ export class FileValidators {
           return null;
         } catch (error) {
           switch (error?.constructor) {
-            case VdfParseError:
+            case vdf.ParseError:
               return { vdfFileValidationError: [{ file }] };
             default:
               return { fileReadError: [{ file }] };

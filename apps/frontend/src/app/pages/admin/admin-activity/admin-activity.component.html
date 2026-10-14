@@ -1,6 +1,6 @@
 <m-card title="Admin Activity">
   <div header class="flex flex-wrap items-center gap-4" [formGroup]="filters">
-    <p-multiSelect
+    <p-multiselect
       placeholder="Activity Types"
       [options]="AdminActivitiesFilters"
       optionLabel="text"
@@ -21,7 +21,7 @@
         </m-accordion-item>
       } @empty {
         @if (!loading) {
-          <p class="my-4 text-center text-2xl text-gray-100">
+          <p class="text-gray-100 my-4 text-center text-2xl">
             @if (totalRecords === -1) {
               User is not an admin
             } @else {

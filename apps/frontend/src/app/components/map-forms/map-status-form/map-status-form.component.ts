@@ -2,7 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChanges,
+  type SimpleChanges,
   inject
 } from '@angular/core';
 import {
